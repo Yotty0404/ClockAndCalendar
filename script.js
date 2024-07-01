@@ -1,16 +1,35 @@
 //スクリーンロック防止
-if ('wakeLock' in navigator) { // wake lock 機能の有無をチェック
+const wakeLockSwitch = document.querySelector('#wake-lock');
+
+let wakeLock = null;
+
+const requestWakeLock = async () => {
     try {
-        navigator.wakeLock.request('screen');
-        alert("wakeLock success. Screen will be kept on."); // 成功
+        wakeLock = await navigator.wakeLock.request('screen');
+
+        wakeLock.addEventListener('release', () => {
+            console.log('Wake Lock was released');
+        });
+        console.log('Wake Lock is active');
     }
-    catch {
-        alert("wakeLock fails."); // 失敗
+    catch (err) {
+        console.error(`$\{err.name\}, $\{err.message\}`);
     }
-}
-else {
-    alert("wakeLock API is not supported. Screen is not kept on."); // そもそも機能がない
-}
+};
+
+const releaseWakeLock = () => {
+    console.log('releasing wakeLock');
+
+    wakeLock.release();
+    wakeLock = null;
+};
+
+wakeLockSwitch.addEventListener('change', (e) => {
+    const checked = $(e.target).is(':checked');
+
+    checked ? requestWakeLock() : releaseWakeLock();
+});
+
 
 
 var ajaxBaseUrlOfNationalHolidays = "https://api.national-holidays.jp/";
