@@ -124,6 +124,10 @@ body{
   color:red;
 }
 
+#container_calendar table tr td{
+  color:white;
+}
+
 /* 画面が横長の場合（ランドスケープモード） */
 @media (min-aspect-ratio: 1/1) {
   #container {
