@@ -1,5 +1,19 @@
 //スクリーンロック防止
-let wakeLock = navigator.wakeLock.request('screen');
+let wakeLock = null;
+
+const requestWakeLock = async () => {
+    try {
+        wakeLock = await navigator.wakeLock.request('screen');
+
+        wakeLock.addEventListener('release', () => {
+            console.log('Wake Lock was released');
+        });
+        console.log('Wake Lock is active');
+    }
+    catch (err) {
+        console.error("error");
+  }
+};
 
 
 var ajaxBaseUrlOfNationalHolidays = "https://api.national-holidays.jp/";
@@ -78,7 +92,8 @@ setInterval(getElements, 100);
 
 // カレンダー
 async function generateCalendar() {
-  holidaysThisMonth = await getHolidaysInfo();
+    holidaysThisMonth = await getHolidaysInfo();
+    requestWakeLock();
 
   const year = now.getFullYear();
   const month = now.getMonth();
@@ -93,7 +108,7 @@ async function generateCalendar() {
   let calendar = `<table>
                               <thead>
                                   <tr><th colspan="7" class="month">${year}年 ${monthNames[month]}</th></tr>
-                                  <tr>${dayNames.map(day => `<th>${day}</th>`).join('')}</tr>
+                                  <tr class="week">${dayNames.map(day => `<th>${day}</th>`).join('')}</tr>
                               </thead>
                               <tbody>`;
 
