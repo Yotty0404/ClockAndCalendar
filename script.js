@@ -3,6 +3,12 @@ const wakeLockSwitch = document.querySelector('#wake-lock');
 
 let wakeLock = null;
 
+$('#btn_wake_lock').on('click', function () {
+    requestWakeLock();
+    $("#container").css("display", "flex");
+    $("#container_btn").hide();
+});
+
 const requestWakeLock = async () => {
     try {
         wakeLock = await navigator.wakeLock.request('screen');
@@ -16,21 +22,6 @@ const requestWakeLock = async () => {
         console.error(`$\{err.name\}, $\{err.message\}`);
     }
 };
-
-const releaseWakeLock = () => {
-    console.log('releasing wakeLock');
-
-    wakeLock.release();
-    wakeLock = null;
-};
-
-wakeLockSwitch.addEventListener('change', (e) => {
-    const checked = $(e.target).is(':checked');
-
-    checked ? requestWakeLock() : releaseWakeLock();
-});
-
-
 
 var ajaxBaseUrlOfNationalHolidays = "https://api.national-holidays.jp/";
 var holidaysThisMonth = [];
