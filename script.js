@@ -1,4 +1,8 @@
-var ajaxBaseUrlOfNationalHolidays = location.protocol + "//api.national-holidays.jp/";
+//スクリーンロック防止
+navigator.wakeLock.request("screen");
+
+
+var ajaxBaseUrlOfNationalHolidays = "https://api.national-holidays.jp/";
 var holidaysThisMonth = [];
 const now = new Date();
 
