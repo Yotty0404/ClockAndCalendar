@@ -21,8 +21,8 @@ body{
 }
 
 #container_clock{
-  width: calc(min(48vw, 90vh));
-  height: calc(min(48vw, 90vh));
+  width: 45vw;
+  height: 45vw;
   position:relative;
 }
 
@@ -112,8 +112,8 @@ body{
 }
 
 .month{
-  line-height: 60px !important;
-  font-size:32px !important;
+  line-height: 68px !important;
+  font-size:40px !important;
 }
 
 .saturday{
@@ -132,8 +132,8 @@ body{
 
 #container_calendar table tr th,#container_calendar table tr td{
   color:white;
-  line-height: 40px;
-  font-size:24px;
+  line-height: 48px;
+  font-size:32px;
 }
 
 
