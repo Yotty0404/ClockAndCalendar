@@ -21,22 +21,22 @@ body{
 }
 
 #container_clock{
-  width: 45vw;
-  height: 45vw;
+  width: 42vw;
+  height: 42vw;
   position:relative;
 }
 
 .line{
-  width:3px;
-  height:14px;
+  width:4px;
+  height:18px;
   position:absolute;
   background:white;
   border-radius:2px;
 }
 
 .line_thin{
-  width:1px;
-  height:10px;
+  width:2px;
+  height:14px;
   background:#BDBDBD;
 }
 
@@ -67,13 +67,11 @@ body{
   top: 8px;
   left: calc(50%);
   width: 2px;
-  height: calc(50% - 10px);;
+  height: calc(50% - 10px);
   background: #ffa015;
   transform-origin: bottom;
   transform: rotate(0deg);
   transition-property: transform ;
-  /*   transition-duration: 1s;
-  transition-timing-function: linear; */
 }
 
 
@@ -95,6 +93,8 @@ body{
   position: relative;
   display: flex;
   justify-content: center;
+  align-items: center;
+  height;48px;
 }
 
 .today{
@@ -102,8 +102,8 @@ body{
   background:white;
   border-radius:50%;
   display:inline-block;
-  height:28px;
-  width:28px;
+  height:48px;
+  width:48px;
   display: flex;
   align-items: center;
   justify-content: center;
