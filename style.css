@@ -107,8 +107,8 @@ body{
 }
 
 .month{
-  line-height: 48px;
-  font-size:22px;
+  line-height: 48px !important;
+  font-size:22px !important;
 }
 
 .saturday{
@@ -127,6 +127,8 @@ body{
 
 #container_calendar table tr th,#container_calendar table tr td{
   color:white;
+  line-height: 36px;
+  font-size:18px;
 }
 
 /* 画面が横長の場合（ランドスケープモード） */
