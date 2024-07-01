@@ -1,5 +1,5 @@
 //スクリーンロック防止
-let wakeLock = await navigator.wakeLock.request('screen');
+let wakeLock = navigator.wakeLock.request('screen');
 
 
 var ajaxBaseUrlOfNationalHolidays = "https://api.national-holidays.jp/";
