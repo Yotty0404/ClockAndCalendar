@@ -17,14 +17,14 @@ body{
 }
 
 #container_clock{
-  width: calc(min(50vw, 90vh));
-  height: calc(min(50vw, 90vh));
+  width: calc(min(48vw, 90vh));
+  height: calc(min(48vw, 90vh));
   position:relative;
 }
 
 .line{
-  width:2px;
-  height:10px;
+  width:3px;
+  height:14px;
   position:absolute;
   background:white;
   border-radius:2px;
@@ -32,6 +32,7 @@ body{
 
 .line_thin{
   width:1px;
+  height:10px;
   background:#BDBDBD;
 }
 
@@ -107,8 +108,8 @@ body{
 }
 
 .month{
-  line-height: 48px !important;
-  font-size:22px !important;
+  line-height: 60px !important;
+  font-size:32px !important;
 }
 
 .saturday{
@@ -127,9 +128,10 @@ body{
 
 #container_calendar table tr th,#container_calendar table tr td{
   color:white;
-  line-height: 36px;
-  font-size:18px;
+  line-height: 40px;
+  font-size:24px;
 }
+
 
 /* 画面が横長の場合（ランドスケープモード） */
 @media (min-aspect-ratio: 1/1) {
