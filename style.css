@@ -124,7 +124,7 @@ body{
   color:red;
 }
 
-#container_calendar table tr td{
+#container_calendar table tr th,#container_calendar table tr td{
   color:white;
 }
 
