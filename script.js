@@ -23,6 +23,27 @@ const requestWakeLock = async () => {
     }
 };
 
+if (document.hidden !== undefined) {
+    document.addEventListener('visibilitychange', onVisibilityChange);
+} else if (document.webkitHidden !== undefined) {
+    document.addEventListener('webkitvisibilitychange', onWebkitVisibilityChange);
+}
+function onVisibilityChange() {
+    if (!document.hidden) {
+        //ブラウザに戻ってきた際に行いたい処理
+        requestWakeLock();
+    }
+}
+
+function onWebkitVisibilityChange() {
+    if (!document.webkitHidden) {
+        //ブラウザに戻ってきた際に行いたい処理
+        requestWakeLock();
+    }
+}
+
+
+
 var ajaxBaseUrlOfNationalHolidays = "https://api.national-holidays.jp/";
 var holidaysThisMonth = [];
 const now = new Date();
@@ -97,6 +118,20 @@ function getElements() {
 
 setInterval(getElements, 100);
 
+function CreateDayNames(dayNames) {
+    return dayNames.map(day => {
+        if (day === '日') {
+            return `<th class="holiday">${day}</th>`;
+        }
+        else if (day === '土') {
+            return `<th class="saturday">${day}</th>`;
+        }
+        else {
+            return `<th>${day}</th>`;
+        }
+    }).join('');
+}
+
 // カレンダー
 async function generateCalendar() {
     holidaysThisMonth = await getHolidaysInfo();
@@ -114,7 +149,7 @@ async function generateCalendar() {
     let calendar = `<table>
                               <thead>
                                   <tr><th colspan="7" class="month">${year}年 ${monthNames[month]}</th></tr>
-                                  <tr class="week">${dayNames.map(day => `<th>${day}</th>`).join('')}</tr>
+                                  <tr class="week">${CreateDayNames(dayNames)}</tr>
                               </thead>
                               <tbody>`;
 
