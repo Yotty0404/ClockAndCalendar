@@ -45,8 +45,8 @@ body {
 }
 
 #container_clock {
-  width: 46vw;
-  height: 46vw;
+  width: calc(100vh - 48px);
+  height: calc(100vh - 48px);
   position: relative;
 }
 
@@ -99,7 +99,7 @@ body {
 }
 
 #container_calendar {
-  width: 46vw;
+  width: 44vw;
   color: white;
 }
 
