@@ -3,14 +3,10 @@ const wakeLockSwitch = document.querySelector('#wake-lock');
 
 let wakeLock = null;
 
-// $('#btn_wake_lock').on('click', function () {
-//     requestWakeLock();
-//     $("#container").css("display", "flex");
-//     $("#container_btn").hide();
-// });
-
-$(window).on('load', function () {
+$('#btn_wake_lock').on('click', function () {
     requestWakeLock();
+    $("#container").css("display", "flex");
+    $("#container_btn").hide();
 });
 
 const requestWakeLock = async () => {
