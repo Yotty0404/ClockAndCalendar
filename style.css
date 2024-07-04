@@ -71,17 +71,19 @@ body {
   width: 10px;
   height: calc(50% - 60px);
   background: white;
+  border-radius: 8px;
   transform-origin: bottom;
   transform: rotate(90deg);
 }
 
 .clock-min {
   position: absolute;
-  top: 22px;
+  top: 26px;
   left: calc(50% - 2px);
   width: 6px;
-  height: calc(50% - 24px);
+  height: calc(50% - 28px);
   background: white;
+  border-radius: 8px;
   transform-origin: bottom;
   transform: rotate(0deg);
 }
