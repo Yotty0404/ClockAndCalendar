@@ -187,3 +187,24 @@ body {
     width: 98vw;
   }
 }
+
+/* ipad 画面が横長の場合（ランドスケープモード） */
+@media (min-aspect-ratio: 1/1) and (min-width: 834px) {
+  #container_clock {
+    width: 48vw;
+    height: 48vw;
+  }
+}
+
+/* ipad 画面が縦長の場合（ポートレートモード） */
+@media (max-aspect-ratio: 1/1) and (min-width: 600px) {
+  #container {
+    justify-content: space-around;
+    /* padding-top: 40px; */
+    gap: 0;
+  }
+
+  #container_calendar {
+    width: 72vw;
+  }
+}
