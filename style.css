@@ -6,7 +6,7 @@ body {
   margin: 0;
   padding: 0;
   width: 100vw;
-  height: 100vh;
+  height: 100dvh;
   overflow: hidden;
   font-family: "メイリオ", "Meiryo", sans-serif;
 }
@@ -45,8 +45,8 @@ body {
 }
 
 #container_clock {
-  width: calc(100vh - 48px);
-  height: calc(100vh - 48px);
+  width: calc(100dvh - 36px);
+  height: calc(100dvh - 36px);
   position: relative;
 }
 
@@ -67,7 +67,7 @@ body {
 .clock-hour {
   position: absolute;
   top: 60px;
-  left: calc(50% - 2px);
+  left: calc(50% - 5px);
   width: 10px;
   height: calc(50% - 60px);
   background: white;
@@ -78,7 +78,7 @@ body {
 
 .clock-min {
   position: absolute;
-  top: 26px;
+  top: 30px;
   left: calc(50% - 2px);
   width: 6px;
   height: calc(50% - 28px);
@@ -153,6 +153,13 @@ body {
   -webkit-text-stroke: 0.2px #b65a53 !important;
 }
 
+
+.holiday span {
+  color: #b65a53 !important;
+  font-weight: bold;
+  -webkit-text-stroke: 0.2px #b65a53 !important;
+}
+
 #container_calendar table tr th {
   color: white;
   line-height: 38px;
@@ -178,11 +185,12 @@ body {
 @media (max-aspect-ratio: 1/1) {
   #container {
     flex-direction: column;
+    gap: 4px;
   }
 
   #container_clock {
-    width: 49vh;
-    height: 49vh;
+    width: 40vh;
+    height: 40vh;
   }
 
   #container_calendar {
@@ -201,9 +209,10 @@ body {
 /* ipad 画面が縦長の場合（ポートレートモード） */
 @media (max-aspect-ratio: 1/1) and (min-width: 600px) {
   #container {
-    justify-content: space-around;
+    justify-content: flex-start;
     /* padding-top: 40px; */
-    gap: 0;
+    gap: 72px;
+    padding-top:36px;
   }
 
   #container_calendar {

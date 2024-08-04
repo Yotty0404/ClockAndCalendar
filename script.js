@@ -46,7 +46,7 @@ function onWebkitVisibilityChange() {
 
 var ajaxBaseUrlOfNationalHolidays = "https://api.national-holidays.jp/";
 var holidaysThisMonth = [];
-const now = new Date();
+let now = new Date();
 
 async function getHolidaysInfo() {
     const year = now.getFullYear();
@@ -188,3 +188,20 @@ async function generateCalendar() {
 }
 
 generateCalendar();
+
+function updateToday() {
+    var newDate = (new Date()).getDate();
+    if (now.getDate() == newDate) return;
+
+    $('.td_today').removeClass('td_today');
+    $('.today').removeClass('today');
+
+    var today = $(`td:contains(${newDate})`).filter(function () {
+        return $(this).text() == newDate;
+    });
+    today.addClass('td_today');
+    today.text('');
+    today.append(`<span class="today">${newDate}</span>`)
+}
+
+setInterval(updateToday, 100);
