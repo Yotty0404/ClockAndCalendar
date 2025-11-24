@@ -90,6 +90,35 @@ if (window.visualViewport) {
 }
 
 function DrawPoint() {
+    // 拡大率が変わっている場合に 100% に戻す試み
+    (function resetZoomToDefault() {
+        try {
+            // 非標準だが多くのブラウザで即時効果がある
+            document.documentElement.style.zoom = '1';
+            document.body.style.zoom = '1';
+        }
+        catch (e) {
+            // ignore
+        }
+
+        try {
+            // viewport meta があれば上書き、なければ追加
+            var mv = document.querySelector('meta[name=viewport]');
+            var content = 'width=device-width, initial-scale=1, maximum-scale=1';
+            if (mv) {
+                mv.setAttribute('content', content);
+            } else {
+                mv = document.createElement('meta');
+                mv.name = 'viewport';
+                mv.content = content;
+                document.head.appendChild(mv);
+            }
+        }
+        catch (e) {
+            // ignore
+        }
+    })();
+
     // 既存の目盛り要素を削除して重複を防ぐ
     $('#container_clock').find('.line, .line_thin').remove();
 
