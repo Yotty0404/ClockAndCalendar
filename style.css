@@ -2,6 +2,17 @@ html {
   -webkit-text-size-adjust: 100%;
 }
 
+:root {
+  /* 時計の内側余白とハンドの相対位置を制御する変数 */
+  --clock-padding-hour: 12%;
+  --clock-padding-min: 6%;
+  --clock-padding-sec: 2%;
+  --hand-width-hour: 10px;
+  --hand-width-min: 6px;
+  --hand-width-sec: 2px;
+  --clock-offset-y: 0%; /* 時計全体の縦オフセット（下方向に正） */
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -45,9 +56,17 @@ body {
 }
 
 #container_clock {
-  width: calc(100dvh - 36px);
-  height: calc(100dvh - 36px);
+  /* ビューポート高さを基準にしつつ、横幅（カレンダー領域）に合わせて縮小する
+     正方形を保つため aspect-ratio を使用する */
+  width: min(calc(100dvh - 36px), 60vw);
+  aspect-ratio: 1 / 1;
+  height: auto;
   position: relative;
+  box-sizing: border-box;
+  padding: 18px; /* 内側余白を確保してハンドがはみ出さないようにする */
+  max-width: 100%;
+  max-height: calc(100% - 36px);
+  transform: translateY(var(--clock-offset-y));
 }
 
 .line {
@@ -66,37 +85,37 @@ body {
 
 .clock-hour {
   position: absolute;
-  top: 60px;
-  left: calc(50% - 5px);
-  width: 10px;
-  height: calc(50% - 60px);
+  top: var(--clock-padding-hour);
+  left: 50%;
+  width: var(--hand-width-hour);
+  height: calc(50% - var(--clock-padding-hour));
   background: white;
   border-radius: 8px;
-  transform-origin: bottom;
-  transform: rotate(90deg);
+  transform-origin: center bottom;
+  transform: translateX(-50%) rotate(90deg);
 }
 
 .clock-min {
   position: absolute;
-  top: 30px;
-  left: calc(50% - 2px);
-  width: 6px;
-  height: calc(50% - 28px);
+  top: var(--clock-padding-min);
+  left: 50%;
+  width: var(--hand-width-min);
+  height: calc(50% - var(--clock-padding-min));
   background: white;
   border-radius: 8px;
-  transform-origin: bottom;
-  transform: rotate(0deg);
+  transform-origin: center bottom;
+  transform: translateX(-50%) rotate(0deg);
 }
 
 .clock-sec {
   position: absolute;
-  top: 10px;
-  left: calc(50%);
-  width: 2px;
-  height: calc(50% - 10px);
+  top: var(--clock-padding-sec);
+  left: 50%;
+  width: var(--hand-width-sec);
+  height: calc(50% - var(--clock-padding-sec));
   background: #ffa015;
-  transform-origin: bottom;
-  transform: rotate(0deg);
+  transform-origin: center bottom;
+  transform: translateX(-50%) rotate(0deg);
   transition-property: transform;
 }
 
@@ -178,6 +197,11 @@ body {
 @media (min-aspect-ratio: 1/1) {
   #container {
     flex-direction: row;
+  }
+
+  /* ランドスケープ時はやや下寄せにして見た目の中央に合わせる */
+  :root {
+    --clock-offset-y: 1.5%;
   }
 }
 

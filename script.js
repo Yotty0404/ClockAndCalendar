@@ -72,33 +72,43 @@ $(window).resize(function () {
 DrawPoint();
 
 function DrawPoint() {
-    for (let i = 0; i < 60; i++) {
-        var num = ("00" + i).slice(-2);
-        if (num % 5 == 0) {
+    // 既存の目盛り要素を削除して重複を防ぐ
+    $('#container_clock').find('.line, .line_thin').remove();
+
+    const item_num = 60;
+    const deg = 360.0 / item_num;
+    const radians = (deg * Math.PI) / 180.0;
+    const radians90 = (90 * Math.PI) / 180.0;
+
+    // padding を含む内側幅・高さで中心を計算する（padding があると左右がずれるため）
+    const innerW = $("#container_clock").innerWidth();
+    const innerH = $("#container_clock").innerHeight();
+    const circle_r = Math.min(innerW, innerH) / 2 - 10;
+    const centerX = innerW / 2;
+    const centerY = innerH / 2;
+
+    for (let i = 0; i < item_num; i++) {
+        const num = ("00" + i).slice(-2);
+        if (i % 5 == 0) {
             $('#container_clock').append(`<div class="line" id="line${num}"></div>`);
         }
         else {
             $('#container_clock').append(`<div class="line line_thin" id="line${num}"></div>`);
         }
 
-        var item_num = 60;
-        var deg = 360.0 / item_num;
-        var radians = (deg * Math.PI) / 180.0;
-        var radians90 = (90 * Math.PI) / 180.0;
-        var circle_r = $("#container_clock").width() / 2 - 10;
-
-        $(".line").each(function (i, elem) {
-            var x = Math.cos(radians * i - radians90) * circle_r + circle_r + 10;
-            var y = Math.sin(radians * i - radians90) * circle_r + circle_r + 2;
-            $(elem).css("left", x);
-            $(elem).css("top", y);
-            $(elem).css("transform", `rotate(${deg * i}deg)`);
-        });
+        const x = Math.cos(radians * i - radians90) * circle_r + centerX;
+        const y = Math.sin(radians * i - radians90) * circle_r + centerY;
+        const $elem = $(`#line${num}`);
+        $elem.css("left", `${x}px`);
+        $elem.css("top", `${y}px`);
+        // 目盛りの中心が指定位置になるように translate(-50%,-50%) を付与
+        $elem.css("transform", `translate(-50%,-50%) rotate(${deg * i}deg)`);
     }
 }
 
 function getElements() {
-    const time = new Date();
+    // const time = new Date();
+    let time = new Date(2021, 1, 11,12,0,0);
     const hour = time.getHours();
     const minute = time.getMinutes();
     const second = time.getSeconds();
@@ -111,9 +121,10 @@ function getElements() {
     const clockMin = document.getElementsByClassName('clock-min')[0];
     const clockSec = document.getElementsByClassName('clock-sec')[0];
 
-    clockHour.style.setProperty('transform', `rotate(${degreeHour}deg)`);
-    clockMin.style.setProperty('transform', `rotate(${degreeMin}deg)`);
-    clockSec.style.setProperty('transform', `rotate(${degreeSec}deg)`);
+    // 針の root 側で translateX(-50%) を使用しているので、ここでも必ず同じ translate を維持して回転のみ差し替える
+    clockHour.style.setProperty('transform', `translateX(-50%) rotate(${degreeHour}deg)`);
+    clockMin.style.setProperty('transform', `translateX(-50%) rotate(${degreeMin}deg)`);
+    clockSec.style.setProperty('transform', `translateX(-50%) rotate(${degreeSec}deg)`);
 }
 
 setInterval(getElements, 100);
