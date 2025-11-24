@@ -70,6 +70,24 @@ $(window).resize(function () {
 });
 
 DrawPoint();
+// iPhone 等で向きが変わったときに目盛りを再描画する（orientationchange, Screen Orientation API, visualViewport）
+// 少し遅延させてレイアウト更新後に描画
+window.addEventListener('orientationchange', function () {
+    setTimeout(DrawPoint, 250);
+});
+
+if (typeof screen !== 'undefined' && screen.orientation && screen.orientation.addEventListener) {
+    screen.orientation.addEventListener('change', function () {
+        setTimeout(DrawPoint, 250);
+    });
+}
+
+if (window.visualViewport) {
+    // visualViewport はレイアウト変化で発火するため補助的に利用
+    visualViewport.addEventListener('resize', function () {
+        DrawPoint();
+    });
+}
 
 function DrawPoint() {
     // 既存の目盛り要素を削除して重複を防ぐ
