@@ -107,8 +107,8 @@ function DrawPoint() {
 }
 
 function getElements() {
-    // const time = new Date();
-    let time = new Date(2021, 1, 11,12,0,0);
+    const time = new Date();
+    // let time = new Date(2021, 1, 11,12,0,0);
     const hour = time.getHours();
     const minute = time.getMinutes();
     const second = time.getSeconds();
